@@ -1,13 +1,23 @@
-import * as React from 'react';
+import React , { useState } from 'react';
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 
 import TextField from '@mui/material/TextField';
+import Button from '@mui/material/Button';
+import './index.css';
 
-function App() {
+const App = () => {
+  const[p, setP] = useState(0)
+  const[t, setT] = useState(0)
+  const[r, setR] = useState(0)
+  const[si, setSi] = useState(0)
+
+  const calculateInterest =() => {
+    setSi(p*t*r/100)
+  }
   return (
-    <div>
+    <div className='div'>
       <AppBar position="static">
         <Toolbar>
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
@@ -15,9 +25,15 @@ function App() {
           </Typography>
         </Toolbar>
       </AppBar>
-      <br></br>
+      <br /><br />
+      <TextField onChange={(event) => setP(event.target.value)}  id="outlined-basic" label="Enter P" variant="outlined" /><br /><br />
+      <TextField onChange={(event) => setT(event.target.value)} id="outlined-basic" label="Enter T" variant="outlined" /> <br /><br />
+      <TextField onChange={(event) => setR(event.target.value)} id="outlined-basic" label="Enter R" variant="outlined" /><br /><br />
 
-      <TextField id="outlined-basic" label="Outlined" variant="outlined" />     
+      <Button onClick={()=> calculateInterest()} variant="contained">Calculate</Button>
+      <Typography variant="h6" gutterBottom component="div">
+        Simple Interest Is: {si}
+      </Typography> 
     </div>
   );
 }
